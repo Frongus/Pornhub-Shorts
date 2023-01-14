@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./style.css">
+    <title>Home</title>
+</head>
+<body>
+    <div id="Title">
+        <h1>Pornhub Shorts</h1>
+    </div>
+    <br>
+    <div id="Content">
+        <div id="data">
+        </div>
+        <button onclick="Get()" class="btn">Load new video</button>
+        <input type="checkbox" name="longer" placeholder="Longer Videos" id="check1">
+    </div>
+</body>
+<script>
+    const dataElement = document.getElementById('data');
+    const Check1 = document.getElementById('check1');
+
+    var newData;
+
+    function Get(data) {
+        console.log('refreshing');
+        if(Check1.checked | data == "1")
+        {
+            fetch('/data/get/true').then((response) => response.json()).then((data) => {
+                console.log(data);
+                if(data == '[{err01}]')
+                {
+                    alert('Something went wrong');
+                }
+                else {
+                    newData = data.replace(']', '');
+                    newData = newData.replace('[', '');
+                    newData = newData.replace('}', '');
+                    newData = newData.replace('{', '');
+                    console.log(newData)
+                    Render(newData)
+                }
+            })
+        }
+        else {
+            fetch('/data/get/false').then((response) => response.json()).then((data) => {
+                console.log(data);
+                if(data == '[{err01}]')
+                {
+                    alert('Something went wrong');
+                }
+            })
+        }
+    }
+
+    function Render(data) {
+        try{
+            var content = document.getElementById('content')
+            content.remove();
+        }
+        catch {
+            console.log('No previus vid')
+        }
+        
+        var iframe = document.createElement('iframe')
+        iframe.setAttribute(`src`, `https://www.pornhub.com/embed/${data}`)
+        iframe.setAttribute('id', 'content')
+        iframe.setAttribute('width', '300')
+        iframe.setAttribute('height', '500')
+        dataElement.appendChild(iframe);
+    }
+
+    Get("1");
+</script>
+</html>

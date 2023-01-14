@@ -1,0 +1,43 @@
+:root {
+    --backgroundColor: #171717;
+    --backgroundColor2: #080808;
+    --Color1: #BF40BF; 
+}
+
+*{
+    color: white;
+    font-family: 'Cabin', sans-serif;
+    text-align: center;
+}
+
+h1 {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 25px;
+}
+
+body {
+    background-color: var(--backgroundColor);
+}
+
+#Title {
+    position: fixed;
+    left: 50%;
+    transform: translate(-50%);
+}
+
+#Content {
+    position: absolute;
+    top: 55%;
+    left: 50%;
+    transform: translate(-50%, -45%);
+}
+
+.btn {
+    padding: 10px;
+    background-color: var(--backgroundColor2);
+    border-radius: 5px;
+}
+
+#content {
+    border: solid var(--backgroundColor2) 1px;
+}
