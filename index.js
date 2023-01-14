@@ -1,7 +1,7 @@
 const express = require('express');
 const server = express();
 const config = require('./config/config.json');
-const port = config.PORT
+const port = 78750;
 
 server.use('/', require('./modules/pages.js'));
 server.use('/data/', require('./modules/data.js'));
